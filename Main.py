@@ -25,7 +25,10 @@ class Game:
         self.balls = Ball.Balls(self)
         self.font = pygame.freetype.Font(None, 24)
         self.condition = None
-        self.wor = wor.end(self)
+        self.win = wor.Win(self)
+        self.lose = wor.Lose(self)
+        self.food = 0
+        self.work = True
 
     def events(self):
         events = pygame.event.get()
@@ -43,7 +46,9 @@ class Game:
 
         for i in self.balls_list:
             i.draw()
-        self.font.render_to(self.window, [0, 0], f'{self.fp // 100}', [24, 240, 31])
+        self.font.render_to(self.window, [0, 0], f'Time: {self.fp // 100}', [24, 240, 31])
+        self.font.render_to(self.window,[125,0],f'{self.food} of 50',[24,240,31])
+        self.font.render_to(self.window,[260,0],f'Lives: {self.lives} of 3',[24,240,31])
 
 
 
@@ -52,6 +57,7 @@ class Game:
         for ball in self.balls_list:
             if self.gamer.hitbox.colliderect(ball.hitbox) == True:
                 self.balls_list.remove(ball)
+                self.food += 1
                 if self.gamer.hitbox.w <= ball.hitbox.w:
                     self.lives -= 1
                 else:
@@ -60,23 +66,31 @@ class Game:
             i.update()
         if self.lives == 0:
             print('lose')
+            self.condition = 'lose'
+        if self.food == 50:
+            self.condition = 'win'
 
     def start(self):
         while self.value_for_while == True:
-            if self.menu_mode == True:
-                self.menu.draw()
-                self.menu.events()
+            if self.work == True:
+                if self.menu_mode == True:
+                    self.menu.draw()
+                    self.menu.events()
 
-            elif self.condition != None:
-                self.wor.draw()
+                else:
 
-
-            else:
-
-                self.draw()
-                self.events()
-                self.update()
-                self.music.play(-1)
+                    self.draw()
+                    self.events()
+                    self.update()
+                    self.music.play(-1)
+            if self.condition == 'lose':
+                self.lose.draw()
+                self.lose.events()
+                self.work = False
+            if self.condition == 'win':
+                self.win.draw()
+                self.win.events()
+                self.work = False
             pygame.display.update()
             self.fp += 1
             self.clock.tick(100)

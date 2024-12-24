@@ -1,19 +1,35 @@
 import pygame
 import downloads
-class end:
+
+
+class Win:
     def __init__(self, game):
         self.game = game
-        if self.game.condition == 'win':
-            self.picture = downloads.win
-            self.hitbox = pygame.Rect([0, 0], self.picture.get_size())
-        elif self.game.condition == 'lose':
-            self.picture = downloads.lose
-            self.hitbox = pygame.Rect([0, 0], self.picture.get_size())
-
-
+        self.picture = downloads.win
+        self.hitbox = pygame.Rect([0, 0], self.picture.get_size())
 
     def draw(self):
-        self.game.window.blit(self.picture,self.hitbox)
-        if self.game.fp == 20:
-            self.game.condition = 'win'
+        self.game.window.blit(self.picture, self.hitbox)
+
+    def events(self):
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                self.game.value_for_while = False
+
+
+class Lose:
+    def __init__(self, game):
+        self.game = game
+        self.picture = downloads.lose
+        self.hitbox = pygame.Rect([0, 0], self.picture.get_size())
+
+    def draw(self):
+        self.game.window.blit(self.picture, self.hitbox)
+
+    def events(self):
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                self.game.value_for_while = False
 
