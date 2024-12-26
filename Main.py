@@ -1,3 +1,4 @@
+#Imports
 import pygame
 import downloads
 import Ball
@@ -8,7 +9,7 @@ import time
 import pygame.freetype
 import win_or_lose as wor
 
-
+#game
 class Game:
     def __init__(self):
         self.value_for_while = True
@@ -39,7 +40,6 @@ class Game:
     def draw(self):
         self.window.blit(downloads.back, [0, 0])
         self.gamer.draw(self.window)
-        # self.balls.draw()
         if self.fp % 50 == 0:
             self.balls = Ball.Balls(self)
             self.balls_list.append(self.balls)

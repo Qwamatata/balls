@@ -16,6 +16,6 @@ class Gamer:
         self.hitbox.centerx = mouse_pos[0]
         self.hitbox.centery = mouse_pos[1]
     def change_size(self):
-        self.hitbox.w += 10
-        self.hitbox.h += 10
+        self.hitbox.w += 1
+        self.hitbox.h += 1
         self.picture = pygame.transform.scale(self.picture,self.hitbox.size)
