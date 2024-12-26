@@ -23,3 +23,6 @@ class Menu:
                 if event.key == pygame.K_ESCAPE:
                     self.music.play()
                     self.game.menu_mode = False
+                    self.game.lives = 3
+                    self.game.food = 0
+                    self.game.fp = 0

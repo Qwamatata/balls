@@ -16,6 +16,11 @@ class Win:
         for event in events:
             if event.type == pygame.QUIT:
                 self.game.value_for_while = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.game.condition = ''
+                    self.game.work = True
+                    self.game.menu_mode = True
 
 
 class Lose:
@@ -32,4 +37,9 @@ class Lose:
         for event in events:
             if event.type == pygame.QUIT:
                 self.game.value_for_while = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.game.condition = ''
+                    self.game.work = True
+                    self.game.menu_mode = True
 

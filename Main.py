@@ -66,9 +66,11 @@ class Game:
             i.update()
         if self.lives == 0:
             print('lose')
+            self.work = False
             self.condition = 'lose'
         if self.food == 50:
             self.condition = 'win'
+            self.work = False
 
     def start(self):
         while self.value_for_while == True:
@@ -86,11 +88,9 @@ class Game:
             if self.condition == 'lose':
                 self.lose.draw()
                 self.lose.events()
-                self.work = False
             if self.condition == 'win':
                 self.win.draw()
                 self.win.events()
-                self.work = False
             pygame.display.update()
             self.fp += 1
             self.clock.tick(100)
